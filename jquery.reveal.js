@@ -8,11 +8,22 @@
 
 
 (function ($) {
-  $('a[data-reveal-id]').live('click', function (event) {
-    event.preventDefault();
-    var modalLocation = $(this).attr('data-reveal-id');
-    $('#' + modalLocation).reveal($(this).data());
-  });
+  if(parseFloat(jQuery.fn.jquery)>=1.9)
+  {
+		$('a[data-reveal-id]').on('click', null, function(e) {
+			e.preventDefault();
+			var modalLocation = $(this).attr('data-reveal-id');
+			$('#'+modalLocation).reveal($(this).data());
+		});
+	}
+	else
+	{
+		$('a[data-reveal-id]').live('click', function(e) {
+			e.preventDefault();
+			var modalLocation = $(this).attr('data-reveal-id');
+			$('#'+modalLocation).reveal($(this).data());
+		});
+	}
 
   $.fn.reveal = function (options) {
     var defaults = {
